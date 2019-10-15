@@ -2,12 +2,12 @@ language: julia
 addons:
   apt_packages:
     - gfortran
-before_install:
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-        brew install gcc;
-    fi
+# before_install:
+#   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+#         brew install gcc;
+#     fi
 os:
-  - linux
+  # - linux
   - osx
 julia:
   - 0.7
