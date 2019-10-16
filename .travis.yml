@@ -17,4 +17,4 @@ julia:
 notifications:
   email: false
 script:
-  - julia -e 'import Pkg; Pkg.build(); Pkg.test()'
+  - julia -e 'import Pkg; Pkg.test()'
