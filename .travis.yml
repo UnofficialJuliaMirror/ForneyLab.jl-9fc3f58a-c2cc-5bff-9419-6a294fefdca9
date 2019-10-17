@@ -6,17 +6,16 @@ language: julia
 #   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
 #         brew install gcc;
 #     fi
-os:
-  # - linux
-  - osx
-julia:
-  - 0.7
-  - 1.0
-  - 1.1
-  - 1.2
+jobs:
+  include:
+    - stage: test
+      julia: 1.0
+      if: branch = master
+      os: osx
+      env: STAGE=test
+      script:
+        - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+        - julia --check-bounds=yes -e 'using Pkg;
+                    Pkg.test("Turing"; coverage=true)'
 notifications:
   email: false
-script:
-  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia --check-bounds=yes -e 'using Pkg;
-                Pkg.test("ForneyLab")'
