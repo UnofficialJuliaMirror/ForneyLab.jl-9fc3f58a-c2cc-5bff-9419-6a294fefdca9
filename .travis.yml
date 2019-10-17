@@ -1,11 +1,11 @@
 language: julia
-addons:
-  apt_packages:
-    - gfortran
-before_install:
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-        brew install gcc;
-    fi
+# addons:
+#   apt_packages:
+#     - gfortran
+# before_install:
+#   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+#         brew install gcc;
+#     fi
 os:
   # - linux
   - osx
@@ -17,4 +17,6 @@ julia:
 notifications:
   email: false
 script:
-  - julia -e 'import Pkg; Pkg.test()'
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia --check-bounds=yes -e 'using Pkg;
+                Pkg.test("ForneyLab")'
